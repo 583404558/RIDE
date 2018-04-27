@@ -251,7 +251,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl,
             try:
                 node.SetWindow(self._animctrl, False)
             except TypeError:  # DEBUG In case wxPython devel not ready
-                node.SetWindow(self._animctrl)
+            node.SetWindow(self._animctrl)
             self._animctrl.Play()
         else:
             # TODO Remove Animation
@@ -727,6 +727,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl,
         if node.IsOk():
             self._render_children(node)
 
+    # TODO: Remove method if CustomTreeItem defines it
     def OnTreeItemCollapsing(self, event):
         for item in event.GetItem().GetChildren():
             itemwindow = item.GetWindow()
