@@ -20,7 +20,8 @@ from robot.errors import DataError
 from robot.variables import is_var
 from robot.output import LOGGER
 from robot.writer import DataFileWriter
-from robot.utils import abspath, is_string, normalize, py2to3, NormalizedDict
+from robot.utils import (abspath, is_string, normalize, py2to3,
+                         NormalizedDict, is_unicode)
 
 from .comments import Comment
 from .populators import FromFilePopulator, FromDirectoryPopulator
@@ -507,7 +508,7 @@ class Variable(object):
             print("DEBUG: [self.name] + self.value + self.comment.as_list(): ")
             print("DEBUG: *%s* *%s* *%s*" % ([self.name], self.value, self.comment.as_list()))
             # DEBUG This will fail on Python3
-            if isinstance(self.value, str) or isinstance(self.value, unicode):
+            if isinstance(self.value, str) or is_unicode(self.value):
                 print("DEBUG: *%s* *%s* *%s*" % ([self.name], [self.value], self.comment.as_list()))
                 return [self.name] + [self.value] + self.comment.as_list()
             else:
